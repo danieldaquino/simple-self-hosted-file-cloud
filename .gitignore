@@ -1,0 +1,6 @@
+tailscale_var_lib/
+.env
+data/
+config/*.crt
+config/*.key
+.DS_Store

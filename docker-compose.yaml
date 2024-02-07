@@ -1,0 +1,38 @@
+version: "3.9"
+services:
+  file-cloud:
+    build:
+      context: .
+    image: samba-server
+    network_mode: service:tailscale
+    volumes:
+      - "./config:/config"
+      - "${DATA_VOLUME_PATH:-./data}:/data"
+    depends_on:
+      tailscale:
+        condition: service_healthy
+  tailscale:
+    hostname: files
+    image: tailscale/tailscale:latest
+    # Tailscale does not need ports to be published because we're not accessing it directly from the host
+    healthcheck:
+      test: ["CMD-SHELL", "tailscale status"]
+      interval: 1s
+      timeout: 5s
+      retries: 60
+    volumes:
+      - "./tailscale_var_lib:/var/lib"
+      - "/dev/net/tun:/dev/net/tun"
+      - "./config:/config"
+      - "./scripts:/scripts"
+    cap_add:
+      - net_admin
+      - sys_module
+      - net_raw
+    command: ["sh", "-c", "/scripts/start.sh"]
+    environment:
+      TS_AUTHKEY: "${TS_AUTHKEY}"
+      TS_DOMAIN: "${TS_DOMAIN}"
+
+volumes:
+  tailscale_var_lib: {}
