@@ -63,5 +63,5 @@ Feel free to open an issue, a pull request, or send a patch via email to [daniel
 
 ## Acknowledgements
 
-- [https://mrpowergamerbr.com/us/blog/2023-03-20-untangling-your-network-tailscale-in-docker-compose/] for the inspiration in setting up Tailscale for Docker containers
+- [https://mrpowergamerbr.com/us/blog/2023-03-20-untangling-your-network-tailscale-in-docker-compose/](https://mrpowergamerbr.com/us/blog/2023-03-20-untangling-your-network-tailscale-in-docker-compose/) for the inspiration in setting up Tailscale for Docker containers
 - Tailscale, Samba, and Docker for the amazing software they provide
