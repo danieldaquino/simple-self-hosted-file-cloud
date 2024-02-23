@@ -12,9 +12,6 @@ RUN apt-get update && \
 # Remove the default Samba configuration file
 RUN rm /etc/samba/smb.conf
 
-# Make a symbolic link from /config/smb.conf to /etc/samba/smb.conf
-RUN ln -s /config/smb.conf /etc/samba/smb.conf
-
 # Create a directory to share
 RUN mkdir /samba-share && \
     chmod 777 /samba-share

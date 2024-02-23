@@ -8,11 +8,15 @@ services:
     volumes:
       - "./config:/config"
       - "${DATA_VOLUME_PATH:-./data}:/data"
+      - "./scripts:/scripts"
     depends_on:
       tailscale:
         condition: service_healthy
+    command: ["sh", "-c", "/scripts/start-samba.sh"]
+    environment:
+      TIME_MACHINE: "${TIME_MACHINE:-false}"
   tailscale:
-    hostname: files
+    hostname: ${HOSTNAME:-files}
     image: tailscale/tailscale:latest
     # Tailscale does not need ports to be published because we're not accessing it directly from the host
     healthcheck:
